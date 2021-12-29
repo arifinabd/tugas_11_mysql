@@ -1,0 +1,134 @@
+1. =========================================================================================================================
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 29
+Server version: 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE user 'Niomic'@'localhost' IDENTIFIED BY 'c0b4d1b4c4!';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [(none)]> use mysql
+Database changed
+MariaDB [mysql]> SELECT user, host, password FROM user;
++--------+-----------+-------------------------------------------+
+| User   | Host      | Password                                  |
++--------+-----------+-------------------------------------------+
+| root   | localhost |                                           |
+| Andi   | %         |                                           |
+| root   | 127.0.0.1 |                                           |
+| root   | ::1       |                                           |
+| pma    | localhost |                                           |
+| Budi   | localhost | *3E5287812B7D1F947439AC45E73935377A3ADEF7 |
+| Alex   | localhost |                                           |
+| Niomic | localhost | *3CAC3DE391B5F907D8BE500EFC145FC3E6208ADF |
++--------+-----------+-------------------------------------------+
+8 rows in set (0.001 sec)
+
+2. =========================================================================================================================
+
+MariaDB [mysql]> SET password FOR 'Niomic'@'localhost' = password('indonesiaku');
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [mysql]> SELECT user, host, password FROM user;
++--------+-----------+-------------------------------------------+
+| User   | Host      | Password                                  |
++--------+-----------+-------------------------------------------+
+| root   | localhost |                                           |
+| Andi   | %         |                                           |
+| root   | 127.0.0.1 |                                           |
+| root   | ::1       |                                           |
+| pma    | localhost |                                           |
+| Budi   | localhost | *3E5287812B7D1F947439AC45E73935377A3ADEF7 |
+| Alex   | localhost |                                           |
+| Niomic | localhost | *4D325E0E2D11B107E020C861636B6790F1291C42 |
++--------+-----------+-------------------------------------------+
+8 rows in set (0.001 sec)
+
+3. ========================================================================================================================
+
+MariaDB [mysql]> EXIT
+Bye
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 30
+Server version: 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> GRANT ALL ON belajar.mahasiswa TO Niomic@localhost;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [(none)]> EXIT
+Bye
+
+c:\xampp\mysql\bin>mysql -u Niomic -pindonesiaku
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 33
+Server version: 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW GRANTS;
++---------------------------------------------------------------------------------------------------------------+
+| Grants for Niomic@localhost                                                                                   |
++---------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Niomic`@`localhost` IDENTIFIED BY PASSWORD '*4D325E0E2D11B107E020C861636B6790F1291C42' |
+| GRANT ALL PRIVILEGES ON `belajar`.`mahasiswa` TO `Niomic`@`localhost`                                         |
++---------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| belajar            |
+| information_schema |
+| test               |
++--------------------+
+3 rows in set (0.001 sec)
+
+4. ========================================================================================================================
+
+MariaDB [(none)]> EXIT
+Bye
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 34
+Server version: 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use mysql
+Database changed
+MariaDB [mysql]> DELETE FROM user WHERE user = 'Niomic';
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [mysql]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [mysql]> SELECT user, host, password FROM user;
++------+-----------+-------------------------------------------+
+| User | Host      | Password                                  |
++------+-----------+-------------------------------------------+
+| root | localhost |                                           |
+| Andi | %         |                                           |
+| root | 127.0.0.1 |                                           |
+| root | ::1       |                                           |
+| pma  | localhost |                                           |
+| Budi | localhost | *3E5287812B7D1F947439AC45E73935377A3ADEF7 |
+| Alex | localhost |                                           |
++------+-----------+-------------------------------------------+
+7 rows in set (0.001 sec)
